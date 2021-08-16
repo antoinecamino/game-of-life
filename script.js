@@ -1,13 +1,17 @@
 let tab = [];
 let nbLignes = 30;
 let nbCol = 30;
+let blanc = 0;
+let noir = 1 ;
 
-tab.length = nbLignes; 
 
-for (let i =0; i<= nbLignes ; i++){
+
+for (let i =0; i< nbLignes ; i++){
     let newTab = [];
-    newTab.length = nbCol;
     tab.push(newTab);
+    for (let i=0; i<nbLignes; i++){
+        newTab.push(blanc);
+    }
 
 }
-console.log(tab);
+console.table(tab);
