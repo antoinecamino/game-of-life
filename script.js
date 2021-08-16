@@ -8,10 +8,11 @@ let noir = 1 ;
 
 for (let i =0; i< nbLignes ; i++){
     let newTab = [];
-    tab.push(newTab);
-    for (let i=0; i<nbLignes; i++){
+    
+    for (let j=0; j<nbCol; j++){
         newTab.push(blanc);
     }
 
+    tab.push(newTab);
 }
 console.table(tab);
