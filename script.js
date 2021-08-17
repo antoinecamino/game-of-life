@@ -9,8 +9,8 @@ let noir =1;
 
 
 function draw(){   
-    let newTabHtml = document.createElement("table");
-    let newtBodyHtml = document.createElement("tBody");
+    let tab = document.createElement("table");
+    let tBody = document.createElement("tBody");
     
 
 
@@ -33,10 +33,10 @@ function draw(){
             })
 
 
-            if (newTabHtml[i][j].className === "click"){
+            if (tab[i][j].className === "click"){
                 for (let k = i-1; k< i+1; k++ ){
                     for (let l= j-1; l< i+1; l++){
-                        if (newTabHtml[k][l].className !== "click"){
+                        if (tab[k][l].className !== "click"){
                             continue;
                         }else{
                             numNeighbours ++;
@@ -44,17 +44,17 @@ function draw(){
                     }
                 }
                 if (numNeighbours<2 || numNeighbours>3){
-                    newTabHtml[i][j].classList.remove("click");
+                    tab[i][j].classList.remove("click");
                 }
             }
 
 
         }
-        newtBodyHtml.appendChild(row);
+        tBody.appendChild(row);
 
     }
-    newTabHtml.appendChild(newtBodyHtml);
-    b.append(newTabHtml); 
+    tab.appendChild(tBody);
+    b.append(tab); 
 }
 
 draw();
