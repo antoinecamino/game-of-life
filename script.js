@@ -21,8 +21,14 @@ function draw(){
             row.appendChild(cell)
 
             cell.addEventListener("click", function(e){
-                cell.className = "click";
+                if (cell.className === "click"){
+                    cell.classList.remove("click");
+                }else{
+                    cell.className = "click";
+                }
             })
+
+
 
 
            
