@@ -19,10 +19,10 @@ newp.innerHTML = tps;
 
 
 
-for (let i =0; i< nbLignes ; i++){
+for (let i = 0; i < nbLignes; i++) {
     let newArr = [];
     arr.push(newArr);
-    for (let x=0; x< nbCol; x++){
+    for (let x = 0; x < nbCol; x++) {
         newArr.push(blanc);
     }
 
@@ -45,10 +45,9 @@ function draw() {
 
         for (let j = 0; j < nbCol; j++) {
             let cell = document.createElement("td");
-            arr.push(blanc);
-            
 
-            
+
+
 
 
             cell.addEventListener("click", e => {
@@ -62,9 +61,11 @@ function draw() {
                     cell.className = "";
                     arr[i][j] = blanc;
                 }
+    
+                console.log(arr);
             });
 
-            
+
 
             row.appendChild(cell);
 
@@ -79,6 +80,7 @@ function draw() {
 
 
     }
+
 
 
 
@@ -160,73 +162,108 @@ function draw() {
 }
 let timer2;
 
-    start.addEventListener("click", e => {
+start.addEventListener("click", e => {
 
-        timer2 = setInterval(function () {
-            
+    timer2 = setInterval(function () {
 
-            tps++;
-            newp.innerHTML = tps;
 
-            for (let i = 0; i < nbLignes; i++) {
-                for (let j = 0; j < nbCol; j++) {
-                    // console.log(arr[i][j] + " = " + noir);
-                    let numNeighbours = 0;
-                    if (arr[i][j] === noir){
-                        // console.log("ok");
-                        for (let k = i-1; k<= i+1; k++ ){
-                            for (let l= j-1; l<=i+1; l++){
-                                console.log("k: " + k + " / l: " + l + " = " + arr[k][l]);
-                                if (k === i && l === j || arr[k][l] !== noir){
+        tps++;
+        newp.innerHTML = tps;
+
+        let arrTemp = [];
+        for (let i = 0; i < nbLignes; i++) {
+            let lineTemp = [];
+            for (let j = 0; j < nbCol; j++) {
+                // console.log(arr[i][j] + " = " + noir);
+                let numNeighboursForDeath = 0;
+                let numNeighboursForBorn = 0;
+                // console.log("case zieutée : " + i + ", " + j)
+                for (let k = i - 1; k <= i + 1; k++) {
+                    for (let l = j - 1; l <= j + 1; l++) {
+                        // console.log("k: " + k + " / l: " + l);
+                        if (k !== -1 && k !== nbLignes && l !== -1 && l !== nbCol) {
+                            if (arr[i][j] === noir) {
+                                // console.log("ok");
+
+                                if (k === i && l === j || arr[k][l] !== noir) {
                                     continue;
-                                }else{
-                                    numNeighbours++;
+                                } else {
+                                    console.log("new voisin");
+                                    numNeighboursForDeath++;
                                 }
+                            } else if (arr[i][j] === blanc) {
+
+                                // console.log(k === i && l === j);
+                                // console.log(arr[k][l] !== noir);
+                                // console.log("k: " + k + " / l: " + l + " = " + arr[k][l]);
+                                if (k === i && l === j || arr[k][l] !== noir) {
+                                    continue;
+                                } else {
+                                    numNeighboursForBorn++;
+                                }
+
                             }
                         }
-                        // console.log(numNeighbours);
-                        if (numNeighbours<2 || numNeighbours>3 ){
-                            // console.log(document.querySelector("tr:nth-child(" + (i+1) +") td:nth-child("+ (j+1) +")"));
-                            document.querySelector("tr:nth-child(" + (i+1) +") td:nth-child("+ (j+1) +")").classList.remove("click");
-                            arr[i][j]=blanc;
-                        }
+
                     }
                 }
+
+                let changed = false;
+                if (arr[i][j] === noir && (numNeighboursForDeath < 2 || numNeighboursForDeath > 3)) {
+                    // console.log(document.querySelector("tr:nth-child(" + (i+1) +") td:nth-child("+ (j+1) +")"));
+                    document.querySelector("tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").classList.remove("click");
+                    lineTemp.push(blanc);
+                    changed = true;
+                }
+                if (arr[i][j] === blanc && numNeighboursForBorn === 3) {
+                    document.querySelector("tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").className = "click";
+                    lineTemp.push(noir);
+                    changed = true;
+                }
+                if (!changed) {
+                    lineTemp.push(arr[i][j]);
+                }
+
             }
-            console.log("finito");
-        }, 1000);
-
-
-       
-
-
-
-
-
-
-
-    });
-
- stop.addEventListener("click", e => {
-
-
-            clearInterval(timer2);
+            
+            arrTemp.push(lineTemp);
+        }
+        console.log(arrTemp);
+        arr = arrTemp.slice();
+        console.log("finito");
+    }, 1000);
 
 
 
-        });
-
-
-        reset.addEventListener("click", e => {
-
-
-            tps=0;
-            newp.innerHTML = tps;
 
 
 
-        });
-    
+
+
+
+
+});
+
+stop.addEventListener("click", e => {
+
+
+    clearInterval(timer2);
+
+
+
+});
+
+
+reset.addEventListener("click", e => {
+
+
+    tps = 0;
+    newp.innerHTML = tps;
+
+
+
+});
+
 
 
 
