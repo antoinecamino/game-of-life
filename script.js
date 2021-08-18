@@ -5,7 +5,7 @@ let nbCol = 30;
 let b = document.body;
 let cellule = document.createElement("div");
 let blanc = 0;
-let noir =1; 
+let noir = 1; 
 
 
 for (let i =0; i< nbLignes ; i++){
