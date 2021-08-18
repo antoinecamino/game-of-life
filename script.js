@@ -1,11 +1,12 @@
 
 let b = document.body;
 let cellule = document.createElement("div");
-let iptdrag = document.querySelector("#taille")
+let iptresize = document.querySelector("#taille")
 let start = document.querySelector("#start")
 let newp = document.querySelector("#p")
 let stop = document.querySelector("#stop")
 let reset = document.querySelector("#reset")
+let ajouter = document.querySelector("#ajouter")
 
 
 let arr = [];
@@ -19,10 +20,12 @@ newp.innerHTML = tps;
 
 
 
-for (let i =0; i< nbLignes ; i++){
+
+
+for (let i = 0; i < nbLignes; i++) {
     let newArr = [];
     arr.push(newArr);
-    for (let x=0; x< nbCol; x++){
+    for (let x = 0; x < nbCol; x++) {
         newArr.push(blanc);
     }
 
@@ -48,7 +51,7 @@ function draw() {
             arr.push(blanc);
             let numNeighbours = 0;
 
-            
+
 
 
             cell.addEventListener("click", e => {
@@ -57,41 +60,24 @@ function draw() {
                 // changement de couleur au click sur les cases 
                 if (cell.className != 'click') {
                     cell.className = 'click';
-                    arr[i,j].splice(noir);
+                    arr[i, j].splice(noir);
                 } else {
                     cell.className = "";
-                    arr[i,j].splice(blanc);
+                    arr[i, j].splice(blanc);
                 }
             });
 
-            if (arr[i][j] === noir){
-                for (let k = i-1; k< i+1; k++ ){
-                    for (let l= j-1; l< i+1; l++){
-                        if (arr[k][l] !== noir){
-                            continue;
-                        }else{
-                            numNeighbours ++;
-                        }
-                    }
-                }
-                if (numNeighbours<2 || numNeighbours>3){
-                    arr[i][j].classList.remove("click");
-                    arr[i,j].splice(blanc);
-                }
-            }
+
+            
+
 
             row.appendChild(cell);
-
-
-
 
         }
 
         tBody.appendChild(row);
 
-
-
-
+        
     }
 
 
@@ -99,17 +85,143 @@ function draw() {
     tab.appendChild(tBody);
     b.append(tab);
     console.table(tab);
-    console.log(iptdrag);
-
-    // redimension du arrleau 
 
 
 
+    
+
+}
 
 
-    iptdrag.addEventListener("change", e => {
 
-        if (iptdrag.value == 1) {
+// timer du bouton start
+
+
+start.addEventListener("click", e => {
+
+    var timer2 = setInterval(function () {
+
+        tps++;
+        newp.innerHTML = tps;
+
+    }, 1000);
+
+stop.addEventListener("click", e => {
+
+
+    clearInterval(timer2);
+
+
+
+});
+
+});
+
+
+
+reset.addEventListener("click", e => {
+
+
+    tps = 0;
+    newp.innerHTML = tps;
+
+
+
+});
+
+// redimension
+
+
+let resize = [{ valeur: iptresize.value = 1, nl: 26, nc: 26 },
+{ valeur: iptresize.value = 2, nl: 28, nc: 28 },
+{ valeur: iptresize.value = 3, nl: 30, nc: 30 },
+{ valeur: iptresize.value = 4, nl: 32, nc: 32 },
+{ valeur: iptresize.value = 5, nl: 34, nc: 34 },
+{ valeur: iptresize.value = 6, nl: 36, nc: 36 },
+{ valeur: iptresize.value = 7, nl: 38, nc: 38 },
+{ valeur: iptresize.value = 8, nl: 40, nc: 40 },
+{ valeur: iptresize.value = 9, nl: 42, nc: 42 },
+{ valeur: iptresize.value = 10, nl: 44, nc: 44 }
+];
+
+
+iptresize.addEventListener("click", e => {
+
+
+
+    document.querySelector("tr:last-child").remove(); // enlève une ligne 
+
+    //enlever une colonne 
+    document.querySelectorAll("tr").forEach(tr => {
+
+        tr.querySelector("td:last-child").remove();
+    });
+
+
+
+
+});
+
+ajouter.addEventListener("click", e => {
+
+  
+
+
+    document.querySelectorAll("tr").forEach(tr => {
+        var td1 = document.createElement("td");     
+        tr.appendChild(td1); 
+    });
+    
+    let tr = document.createElement("tr");
+    tr.innerHTML = document.querySelector("tr:last-child").innerHTML;
+    document.querySelector("tbody").appendChild(tr);
+
+    document.querySelectorAll("tr:last-child td").forEach(td => {
+        td.className = "";
+    });
+});
+
+
+
+draw();
+
+
+
+// b.append(tab);  //////  start.addEventListener("change", e => {
+
+
+
+
+
+
+
+ // if (i === 0) {
+    //     cell.style.background = "rgb(255, 250, 250)";
+    // } else {
+    //     cell.style.background = "rgb(0, 0, 0)";
+    // }
+
+
+
+// si iptdrag.step +=5 alors nb col && nb lignes ++ && td.style.height +5px &&  td.style.width +5px;
+
+
+
+/*
+1=22
+2=23
+3=24
+4=25
+5=26
+6=27
+7=28
+8=29
+9=30
+10=31
+
+
+
+  if (iptdrag.value == 1) {
 
             nbLignes = 22;
             nbCol = 22;
@@ -168,99 +280,6 @@ function draw() {
         console.log(nbCol);
 
     });
-
-
-
-}
-
-// timer du bouton start
-function time() {
-
-    start.addEventListener("click", e => {
-
-        var timer2 = setInterval(function () {
-
-            tps++;
-            newp.innerHTML = tps;
-
-        }, 1000);
-
-
-        stop.addEventListener("click", e => {
-
-
-            clearInterval(timer2);
-
-
-
-        });
-
-
-        reset.addEventListener("click", e => {
-
-
-            tps=0;
-            newp.innerHTML = tps;
-
-
-
-        });
-
-
-
-
-
-
-
-    });
- }
-
-    
-
-
-
-
-
-
-
-
-time();
-draw();
-
-
-
-// b.append(tab);  //////  start.addEventListener("change", e => {
-
-
-
-
-
-
-
- // if (i === 0) {
-    //     cell.style.background = "rgb(255, 250, 250)";
-    // } else {
-    //     cell.style.background = "rgb(0, 0, 0)";
-    // }
-
-
-
-// si iptdrag.step +=5 alors nb col && nb lignes ++ && td.style.height +5px &&  td.style.width +5px;
-
-
-
-/*
-1=22
-2=23
-3=24
-4=25
-5=26
-6=27
-7=28
-8=29
-9=30
-10=31
-
 
 
 
