@@ -2,6 +2,7 @@
 let b = document.body;
 let cellule = document.createElement("div");
 let iptdrag = document.querySelector("#taille")
+let iptspeed = document.querySelector("#vitesse");
 let start = document.querySelector("#start")
 let newp = document.querySelector("#p")
 let stop = document.querySelector("#stop")
@@ -14,6 +15,7 @@ let nbCol = 26;
 let blanc = 0;
 let noir = 1;
 let tps = 0;
+let delay = 1000;
 newp.innerHTML = tps;
 
 
@@ -22,7 +24,7 @@ newp.innerHTML = tps;
 for (let i =0; i< nbLignes ; i++){
     let newArr = [];
     arr.push(newArr);
-    for (let x=0; x< nbCol; x++){
+    for (let x = 0; x < nbCol; x++){
         newArr.push(blanc);
     }
 
@@ -99,12 +101,10 @@ function draw() {
     tab.appendChild(tBody);
     b.append(tab);
     console.table(tab);
-    console.log(iptdrag);
-
-    // redimension du arrleau 
-
-
-
+    console.log(iptdrag);   
+    
+    
+    // redimension du tableau 
 
 
     iptdrag.addEventListener("change", e => {
@@ -174,48 +174,41 @@ function draw() {
 }
 
 // timer du bouton start
-function time() {
+    let timer2;
+
 
     start.addEventListener("click", e => {
 
-        var timer2 = setInterval(function () {
+        timer2 = setInterval(function () {
 
             tps++;
             newp.innerHTML = tps;
 
-        }, 1000);
+        }, delay);
 
 
-        stop.addEventListener("click", e => {
-
-
-            clearInterval(timer2);
-
-
-
-        });
-
-
-        reset.addEventListener("click", e => {
-
-
-            tps=0;
-            newp.innerHTML = tps;
-
-
-
-        });
-
-
-
-
-
-
+        
 
     });
- }
-
     
+    stop.addEventListener("click", e => {
+
+        clearInterval(timer2);
+
+    });
+
+
+    reset.addEventListener("click", e => {
+
+        tps = 0;
+        newp.innerHTML = tps;
+
+    });
+
+    vitesse.addEventListener("change", () => {
+        delay = iptspeed
+
+    });
 
 
 
@@ -224,7 +217,8 @@ function time() {
 
 
 
-time();
+
+
 draw();
 
 
