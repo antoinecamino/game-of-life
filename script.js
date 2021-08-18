@@ -46,7 +46,7 @@ function draw() {
         for (let j = 0; j < nbCol; j++) {
             let cell = document.createElement("td");
             arr.push(blanc);
-            let numNeighbours = 0;
+            
 
             
 
@@ -57,28 +57,14 @@ function draw() {
                 // changement de couleur au click sur les cases 
                 if (cell.className != 'click') {
                     cell.className = 'click';
-                    arr[i,j].splice(noir);
+                    arr[i][j] = noir;
                 } else {
                     cell.className = "";
-                    arr[i,j].splice(blanc);
+                    arr[i][j] = blanc;
                 }
             });
 
-            if (arr[i][j] === noir){
-                for (let k = i-1; k< i+1; k++ ){
-                    for (let l= j-1; l< i+1; l++){
-                        if (arr[k][l] !== noir){
-                            continue;
-                        }else{
-                            numNeighbours ++;
-                        }
-                    }
-                }
-                if (numNeighbours<2 || numNeighbours>3){
-                    arr[i][j].classList.remove("click");
-                    arr[i,j].splice(blanc);
-                }
-            }
+            
 
             row.appendChild(cell);
 
@@ -172,21 +158,56 @@ function draw() {
 
 
 }
-
-// timer du bouton start
-function time() {
+let timer2;
 
     start.addEventListener("click", e => {
 
-        var timer2 = setInterval(function () {
+        timer2 = setInterval(function () {
+            
 
             tps++;
             newp.innerHTML = tps;
 
+            for (let i = 0; i < nbLignes; i++) {
+                for (let j = 0; j < nbCol; j++) {
+                    // console.log(arr[i][j] + " = " + noir);
+                    let numNeighbours = 0;
+                    if (arr[i][j] === noir){
+                        // console.log("ok");
+                        for (let k = i-1; k<= i+1; k++ ){
+                            for (let l= j-1; l<=i+1; l++){
+                                console.log("k: " + k + " / l: " + l + " = " + arr[k][l]);
+                                if (k === i && l === j || arr[k][l] !== noir){
+                                    continue;
+                                }else{
+                                    numNeighbours++;
+                                }
+                            }
+                        }
+                        // console.log(numNeighbours);
+                        if (numNeighbours<2 || numNeighbours>3 ){
+                            // console.log(document.querySelector("tr:nth-child(" + (i+1) +") td:nth-child("+ (j+1) +")"));
+                            document.querySelector("tr:nth-child(" + (i+1) +") td:nth-child("+ (j+1) +")").classList.remove("click");
+                            arr[i][j]=blanc;
+                        }
+                    }
+                }
+            }
+            console.log("finito");
         }, 1000);
 
 
-        stop.addEventListener("click", e => {
+       
+
+
+
+
+
+
+
+    });
+
+ stop.addEventListener("click", e => {
 
 
             clearInterval(timer2);
@@ -205,16 +226,6 @@ function time() {
 
 
         });
-
-
-
-
-
-
-
-    });
- }
-
     
 
 
@@ -223,8 +234,6 @@ function time() {
 
 
 
-
-time();
 draw();
 
 
