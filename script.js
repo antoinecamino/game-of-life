@@ -8,6 +8,7 @@ let stop = document.querySelector("#stop")
 let reset = document.querySelector("#reset")
 
 
+
 let arr = [];
 let nbLignes = 26;
 let nbCol = 26;
@@ -86,8 +87,8 @@ function draw() {
 
     tab.appendChild(tBody);
     b.append(tab);
-    console.table(tab);
-    console.log(iptdrag);
+    // console.table(tab);
+    // console.log(iptdrag);
 
     // redimension du arrleau 
 
@@ -150,10 +151,10 @@ function draw() {
             nbCol = 31;
 
         }
-        console.log(iptdrag.value);
-        console.log(iptdrag);
-        console.log(nbLignes);
-        console.log(nbCol);
+        // console.log(iptdrag.value);
+        // console.log(iptdrag);
+        // console.log(nbLignes);
+        // console.log(nbCol);
 
     });
 
@@ -228,7 +229,7 @@ start.addEventListener("click", e => {
             
             arrTemp.push(lineTemp);
         }
-        console.log(arrTemp);
+        // console.log(arrTemp);
         arr = arrTemp.slice();
         console.log("finito");
     }, 1000);
@@ -255,10 +256,31 @@ stop.addEventListener("click", e => {
 
 
 reset.addEventListener("click", e => {
-
-
+    let tdsClick = document.querySelectorAll(".click");
+    console.log(tdsClick);
+    console.log(tdsClick.length);
+    arr = [];
+    // tdsClick.classList.remove("click");
     tps = 0;
     newp.innerHTML = tps;
+
+    for (let i=0 ; i<tdsClick.length; i++){console.log(tdsClick[i]);
+        tdsClick[i].classList.remove("click");
+    }
+
+
+    for (let i = 0; i < nbLignes; i++) {
+        let newArr = [];
+        arr.push(newArr);
+        for (let x = 0; x < nbCol; x++) {
+            newArr.push(blanc);
+        }
+    
+    }
+
+    console.log(arr);
+
+
 
 
 
