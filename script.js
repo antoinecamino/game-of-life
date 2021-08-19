@@ -189,7 +189,7 @@ start.addEventListener("click", e => {
                                 if (k === i && l === j || arr[k][l] !== noir) {
                                     continue;
                                 } else {
-                                    console.log("new voisin");
+                                    // console.log("new voisin");
                                     numNeighboursForDeath++;
                                 }
                             } else if (arr[i][j] === blanc) {
@@ -231,7 +231,7 @@ start.addEventListener("click", e => {
         }
         // console.log(arrTemp);
         arr = arrTemp.slice();
-        console.log("finito");
+        // console.log("finito");
     }, 1000);
 
 
@@ -257,10 +257,9 @@ stop.addEventListener("click", e => {
 
 reset.addEventListener("click", e => {
     let tdsClick = document.querySelectorAll(".click");
-    console.log(tdsClick);
-    console.log(tdsClick.length);
+    // console.log(tdsClick);
+    // console.log(tdsClick.length);
     arr = [];
-    // tdsClick.classList.remove("click");
     tps = 0;
     clearInterval(timer2);
     newp.innerHTML = tps;
@@ -279,7 +278,7 @@ reset.addEventListener("click", e => {
     
     }
 
-    console.log(arr);
+    // console.log(arr);
 
 
 
