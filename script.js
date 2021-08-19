@@ -262,6 +262,7 @@ reset.addEventListener("click", e => {
     arr = [];
     // tdsClick.classList.remove("click");
     tps = 0;
+    clearInterval(timer2);
     newp.innerHTML = tps;
 
     for (let i=0 ; i<tdsClick.length; i++){console.log(tdsClick[i]);
