@@ -12,11 +12,14 @@ let tab;
 
 
 let arr = [];
-let nbLignes = 26;
-let nbCol = 26;
+let nbLignes = 45;
+let nbCol = 100;
 let blanc = 0;
 let noir = 1;
 let tps = 0;
+// let hauteur=td.style.height='30px';
+// let largeur=td.style.width='30px';
+
 newp.innerHTML = tps;
 
 
@@ -33,7 +36,7 @@ for (let i = 0; i < nbLignes; i++) {
 function draw() {
     tab = document.createElement("table");
     let tBody = document.createElement("tBody");
-
+    
 
    
 
@@ -85,19 +88,30 @@ function draw() {
     console.table(tab);
 
     changement.addEventListener("change", e => {
-        
+        let tds= document.querySelectorAll("td");
         
         if (changement.value==26){
             nbCol = 26
             nbLignes = 26
             
+         
 
         }
         else if (changement.value == 42) {
     
             nbCol = 42
             nbLignes = 42
-           
+
+            tds.forEach(function(td){
+                td.style.height = "25px" ;  
+              
+            })
+
+
+        
+            // td.style.height='25px';
+            // td.style.width='25px';
+
             
             
         }
