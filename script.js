@@ -1,11 +1,11 @@
-
 let b = document.body;
 let cellule = document.createElement("div");
-let iptdrag = document.querySelector("#taille")
-let start = document.querySelector("#start")
-let newp = document.querySelector("#p")
-let stop = document.querySelector("#stop")
-let reset = document.querySelector("#reset")
+let iptdrag = document.querySelector("#taille");
+let iptspeed = document.querySelector("#vitesse");
+let start = document.querySelector("#start");
+let newp = document.querySelector("#p");
+let stop = document.querySelector("#stop");
+let reset = document.querySelector("#reset");
 
 
 
@@ -15,6 +15,8 @@ let nbCol = 26;
 let blanc = 0;
 let noir = 1;
 let tps = 0;
+let delay = 500;
+let allSpeeds = [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100, 50];
 newp.innerHTML = tps;
 
 
@@ -26,7 +28,6 @@ for (let i = 0; i < nbLignes; i++) {
     for (let x = 0; x < nbCol; x++) {
         newArr.push(blanc);
     }
-
 }
 
 function draw() {
@@ -34,10 +35,8 @@ function draw() {
     let tBody = document.createElement("tBody");
 
 
-
-
-
     // creation du tableau 
+
     for (let i = 0; i < nbLignes; i++) {
 
 
@@ -55,6 +54,7 @@ function draw() {
 
 
                 // changement de couleur au click sur les cases 
+
                 if (cell.className != 'click') {
                     cell.className = 'click';
                     arr[i][j] = noir;
@@ -63,23 +63,12 @@ function draw() {
                     arr[i][j] = blanc;
                 }
     
-                console.log(arr);
+                //console.log(arr);
             });
-
-
-
             row.appendChild(cell);
-
-
-
-
         }
 
         tBody.appendChild(row);
-
-
-
-
     }
 
 
@@ -87,10 +76,10 @@ function draw() {
 
     tab.appendChild(tBody);
     b.append(tab);
-    // console.table(tab);
-    // console.log(iptdrag);
+    //console.table(tab);
+    //console.log(iptdrag);
 
-    // redimension du arrleau 
+    // redimension du tableau 
 
 
 
@@ -151,10 +140,10 @@ function draw() {
             nbCol = 31;
 
         }
-        // console.log(iptdrag.value);
-        // console.log(iptdrag);
-        // console.log(nbLignes);
-        // console.log(nbCol);
+        //console.log(iptdrag.value);
+        //console.log(iptdrag);
+        //console.log(nbLignes);
+        //console.log(nbCol);
 
     });
 
@@ -189,7 +178,7 @@ start.addEventListener("click", e => {
                                 if (k === i && l === j || arr[k][l] !== noir) {
                                     continue;
                                 } else {
-                                    // console.log("new voisin");
+                                    //console.log("new voisin");
                                     numNeighboursForDeath++;
                                 }
                             } else if (arr[i][j] === blanc) {
@@ -232,7 +221,7 @@ start.addEventListener("click", e => {
         // console.log(arrTemp);
         arr = arrTemp.slice();
         // console.log("finito");
-    }, 1000);
+    }, delay);
 
 
 
@@ -287,9 +276,21 @@ reset.addEventListener("click", e => {
 });
 
 
+stop.addEventListener("click", e => {
+    clearInterval(timer2);
+});
 
 
+reset.addEventListener("click", e => {
+    tps = 0;
+    newp.innerHTML = tps;
+});
 
+iptspeed.addEventListener("change", () => {
+    clearInterval(timer2);
+    delay = allSpeeds[parseInt(iptspeed.value)];
+    start.click();
+})
 
 
 
