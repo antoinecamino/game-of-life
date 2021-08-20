@@ -1,11 +1,12 @@
 let b = document.body;
 let cellule = document.createElement("div");
-let iptdrag = document.querySelector("#taille")
-let iptspeed = document.querySelector("#vitesse")
-let start = document.querySelector("#start")
-let newp = document.querySelector("#p")
-let stop = document.querySelector("#stop")
-let reset = document.querySelector("#reset")
+let iptdrag = document.querySelector("#taille");
+let iptspeed = document.querySelector("#vitesse");
+let start = document.querySelector("#start");
+let newp = document.querySelector("#p");
+let stop = document.querySelector("#stop");
+let reset = document.querySelector("#reset");
+
 
 let arr = [];
 let nbLignes = 26;
@@ -13,7 +14,7 @@ let nbCol = 26;
 let blanc = 0;
 let noir = 1;
 let tps = 0;
-let delay = 50;
+let delay = 500;
 let allSpeeds = [1000, 900, 800, 700, 600, 500, 400, 300, 200, 100, 50];
 newp.innerHTML = tps;
 
@@ -60,21 +61,10 @@ function draw() {
     
                 //console.log(arr);
             });
-
-
-
             row.appendChild(cell);
-
-
-
-
         }
 
         tBody.appendChild(row);
-
-
-
-
     }
 
 
@@ -238,9 +228,13 @@ reset.addEventListener("click", e => {
     newp.innerHTML = tps;
 });
 
-vitesse.addEventListener("change", () => {
+iptspeed.addEventListener("change", () => {
+    clearInterval(timer2);
     delay = allSpeeds[parseInt(iptspeed.value)];
+    start.click();
 })
+
+
 
 draw();
 
