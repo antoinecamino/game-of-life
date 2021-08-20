@@ -223,24 +223,11 @@ start.addEventListener("click", e => {
         // console.log("finito");
     }, delay);
 
-
-
-
-
-
-
-
-
-
 });
 
 stop.addEventListener("click", e => {
-
-
     clearInterval(timer2);
-
-
-
+    timer2 = undefined;
 });
 
 
@@ -256,23 +243,14 @@ reset.addEventListener("click", e => {
     for (let i=0 ; i<tdsClick.length; i++){console.log(tdsClick[i]);
         tdsClick[i].classList.remove("click");
     }
-
-
     for (let i = 0; i < nbLignes; i++) {
         let newArr = [];
         arr.push(newArr);
         for (let x = 0; x < nbCol; x++) {
             newArr.push(blanc);
-        }
-    
+        }    
     }
-
     // console.log(arr);
-
-
-
-
-
 });
 
 
@@ -287,10 +265,17 @@ reset.addEventListener("click", e => {
 });
 
 iptspeed.addEventListener("change", () => {
-    clearInterval(timer2);
-    delay = allSpeeds[parseInt(iptspeed.value)];
-    start.click();
-})
+    if (timer2) {
+        clearInterval(timer2);
+        delay = allSpeeds[parseInt(iptspeed.value)];
+        start.click();
+    } else {
+        clearInterval(timer2);
+        delay = allSpeeds[parseInt(iptspeed.value)];
+        
+    }
+
+});
 
 
 
