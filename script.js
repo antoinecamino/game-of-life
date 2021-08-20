@@ -8,7 +8,7 @@ let stop = document.querySelector("#stop");
 let reset = document.querySelector("#reset");
 
 
-
+let timer2;
 let arr = [];
 let nbLignes = 45;
 let nbCol = 100;
@@ -23,11 +23,11 @@ newp.innerHTML = tps;
 
 
 for (let i = 0; i < nbLignes; i++) {
-    let newArr = [];
-    arr.push(newArr);
+    let newArr = [];    
     for (let x = 0; x < nbCol; x++) {
         newArr.push(blanc);
     }
+    arr.push(newArr);
 }
 
 function draw() {
@@ -75,7 +75,6 @@ function draw() {
     tab.appendChild(tBody);
     b.append(tab);
 }
-let timer2;
 
 start.addEventListener("click", e => {
 
@@ -152,7 +151,7 @@ reset.addEventListener("click", e => {
     clearInterval(timer2);
     newp.innerHTML = tps;
 
-    for (let i=0 ; i<tdsClick.length; i++){console.log(tdsClick[i]);
+    for (let i=0 ; i<tdsClick.length; i++){
         tdsClick[i].classList.remove("click");
     }
     for (let i = 0; i < nbLignes; i++) {
@@ -166,16 +165,11 @@ reset.addEventListener("click", e => {
 
 
 iptspeed.addEventListener("change", () => {
+    delay = allSpeeds[parseInt(iptspeed.value)];
     if (timer2) {
-        clearInterval(timer2);
-        delay = allSpeeds[parseInt(iptspeed.value)];
-        start.click();
-    } else {
-        clearInterval(timer2);
-        delay = allSpeeds[parseInt(iptspeed.value)];
-        
+        clearInterval(timer2);        
+        start.click();    
     }
-
 });
 
 
