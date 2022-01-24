@@ -85,6 +85,7 @@ start.addEventListener("click", e => {
         newp.innerHTML = tps;
 
         let arrTemp = [];
+        // Calcule le nombre de voisines sélectionnées
         for (let i = 0; i < nbLignes; i++) {
             let lineTemp = [];
             for (let j = 0; j < nbCol; j++) {
@@ -114,6 +115,7 @@ start.addEventListener("click", e => {
                 }
 
                 let changed = false;
+                // Colore les cases en blanc ou noir 
                 if (arr[i][j] === noir && (numNeighboursForDeath < 2 || numNeighboursForDeath > 3)) {
                     document.querySelector("tr:nth-child(" + (i + 1) + ") td:nth-child(" + (j + 1) + ")").classList.remove("click");
                     lineTemp.push(blanc);
@@ -142,6 +144,8 @@ stop.addEventListener("click", e => {
     timer2 = undefined;
 });
 
+
+//  Permet de réinitialiser le timer en cliquant sur le bouton reset
 
 reset.addEventListener("click", e => {
     let tdsClick = document.querySelectorAll(".click");
